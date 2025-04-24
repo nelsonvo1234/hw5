@@ -53,27 +53,25 @@ std::set<std::string> wordleHelper(
         }
     }
     else{
-        for(int i = 0; i < in.length(); i++){
-            if(in[i] == '-'){
-                if(floating.length() < blanks){
-                    for(char letter = 'a'; letter <= 'z'; letter++){
-                        std::string next = in;
-                        next[i] = letter;
-                        //std::cout << letter << std::endl;
-                        std::set<std::string> word = wordleHelper(next, floating, dict, blanks - 1);
-                        words = setUnion(words, word);
-                    }
-                }
-                for(int j = 0; j < floating.length(); j++){
+          int i = in.find('-');
+          if(i != -1){
+            if(floating.length() < blanks){
+                for(char letter = 'a'; letter <= 'z'; letter++){
                     std::string next = in;
-                    next[i] = floating[j];
-                    std::string nFloating = floating.substr(0, j) + floating.substr(j+1, floating.length());
-                    std::set<std::string> word = wordleHelper(next, nFloating, dict, blanks - 1);
+                    next[i] = letter;
+                    //std::cout << letter << std::endl;
+                    std::set<std::string> word = wordleHelper(next, floating, dict, blanks - 1);
                     words = setUnion(words, word);
                 }
-                break;
             }
-        }
+            for(int j = 0; j < floating.length(); j++){
+                std::string next = in;
+                next[i] = floating[j];
+                std::string nFloating = floating.substr(0, j) + floating.substr(j+1, floating.length());
+                std::set<std::string> word = wordleHelper(next, nFloating, dict, blanks - 1);
+                words = setUnion(words, word);
+            }
+          }
     }
     return words;
 }
