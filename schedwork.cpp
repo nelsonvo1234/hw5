@@ -65,23 +65,35 @@ bool scheduleHelper(
     int row, int col, int prev
 )
 {
-    std::cout << "Running scheduleHelper" << std::endl;
+    //std::cout << "Running scheduleHelper" << std::endl;
     if(col >= dailyNeed){
         row += 1;
         col = 0;
         prev = -1;
-        std::cout << "Next row" << std::endl;
+        //std::cout << "Next row" << std::endl;
     }
     if(row >= sched.size()){
         return true;
     }
     // Add your code below
-    std::cout << "Starting for loop" << std::endl;
-    for(int i = prev + 1; i < avail.size(); i++){
+    //std::cout << "Starting for loop" << std::endl;
+    for(int i = prev + 1; i < avail[0].size(); i++){
         if(avail[row][i] && numShift[i] < maxShifts){
             numShift[i]++;
             sched[row][col] = i;
-            std::cout << i << std::endl;
+            //std::cout << i << std::endl;
+    //             int day = 0;
+    // //cout << "Printing schedule" << endl;
+    // for(auto s : sched)
+    // {
+    //     cout << "Day " << day << ": ";
+    //     for(auto nurse : s)
+    //     {
+    //         cout << nurse << " ";
+    //     }
+    //     cout << endl;
+    //     day++;
+    // }
             if(scheduleHelper(avail, dailyNeed, maxShifts, numShift, sched, row, col+1, i)){
                 return true;
             }
