@@ -39,6 +39,7 @@ int main()
 void printSchedule(const DailySchedule& sched)
 {
     int day = 0;
+    cout << "Printing schedule" << endl;
     for(auto s : sched)
     {
         cout << "Day " << day << ": ";
